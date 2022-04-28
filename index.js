@@ -12,7 +12,7 @@ function trimProperties(obj) {
     newObj[prop] = obj[prop].trim();
   }
   return newObj;
-  
+
 }
 
 /**
@@ -28,7 +28,7 @@ function trimPropertiesMutation(obj) {
     obj[prop] = obj[prop].trim();
   }
   return obj;
-  
+
 }
 
 
@@ -56,7 +56,7 @@ class Counter {
    * @param {number} initialNumber - the initial state of the count
    */
   constructor(initialNumber) {
-    // ✨ initialize whatever properties are needed
+    this.count = initialNumber
   }
 
   /**
@@ -72,16 +72,19 @@ class Counter {
    * counter.countDown() // returns 0
    */
   countDown() {
-    // ✨ implement
+    return this.count > 0
+      ? this.count--
+      : 0
   }
-}
+} ``
 
 class Seasons {
   /**
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons = ["summer", "fall", "winter", "spring"]
+    this.currentSeason = 0
   }
 
   /**
@@ -97,7 +100,14 @@ class Seasons {
    * seasons.next() // returns "summer"
    */
   next() {
-    // ✨ implement
+    const newSeason = this.seasons[this.currentSeason]
+
+    if (this.currentSeason === 3) {
+      this.currentSeason = 0
+    } else {
+      this.currentSeason++
+    }
+    return newSeason
   }
 }
 
@@ -111,7 +121,9 @@ class Car {
   constructor(name, tankSize, mpg) {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
-    // ✨ initialize whatever other properties are needed
+    this.tankSize = tankSize
+    this.mpg = mpg
+
   }
 
   /**
@@ -128,7 +140,15 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    // ✨ implement
+    const milesLeft = this.tank * this.mpg
+    if (distance <= milesLeft) {
+      this.odometer = this.odometer + distance
+      this.tank = this.tank - (distance / this.mpg)
+    } else {
+      this.odometer = this.odometer + milesLeft
+      this.tank = 0
+    }
+    return this.odometer
   }
 
   /**
